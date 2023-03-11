@@ -18,8 +18,7 @@ public class WordsClock {
 		};
 		
 		System.out.println(LocalTime.now().toString());
-		int hour = LocalTime.now().getHour();
-		int minutes = LocalTime.now().getMinute(); 
+		int hour = LocalTime.now().getHour(), minutes = LocalTime.now().getMinute(); 
 		
 		wordsclock = getHour(wordsclock, hour, minutes);
 		printClock(wordsclock);
@@ -76,15 +75,16 @@ public class WordsClock {
 	private static char[][] getHour(char[][] wordsclock, int hour, int minutes) {
 		wordsclock = getMinutes(wordsclock, minutes);
 		wordsclock = (hour < 11) ? am(wordsclock) : pm(wordsclock);
+		if (minutes > 32) {
+			hour++;
+		}
 		if (hour == 0) {
 			hour += 12;
 		}
 		if (hour > 12) {
 			hour -= 12; 
 		}
-		if (minutes > 32) {
-			hour++;
-		}
+		
 		switch (hour) {
 		case 1 -> wordsclock = one(wordsclock);
 		case 2 -> wordsclock = two(wordsclock);
